@@ -1,0 +1,11 @@
+{
+  "name": "uniq.pulse",
+  "short_name": "uniq.pulse",
+  "description": "Each ticker launches once. PulseChain launch desk (demo).",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#07060c",
+  "theme_color": "#07060c",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

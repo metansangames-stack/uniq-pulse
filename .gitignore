@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+.env
+.env.local
+.netlify/
+uniqfun-app/public/*_1440*.png
+uniqfun-app/public/*_390*.png
