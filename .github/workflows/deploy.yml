@@ -1,0 +1,38 @@
+name: Deploy uniq.pulse to Netlify
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: uniqfun-app
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: uniqfun-app/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit & integration tests
+        run: npm test -- --run
+
+      - name: Build production bundle
+        run: npm run build
+
+      - name: Deploy to Netlify (https://uniq-pulse-demo.netlify.app)
+        run: npx --yes netlify-cli deploy --prod --dir=dist --site=083443a7-6a61-42b7-bd67-bb787aafbb88
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
